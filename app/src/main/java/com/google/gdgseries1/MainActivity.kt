@@ -61,102 +61,15 @@ class MainActivity : ComponentActivity() {
 }
 
 
-/**
- *
- *
- *  1-show how to  place composable in either rows or column
-Garage cars Example:
-2- show the Horizontal Alignment
 
-3-show the default size of the composable ( add a background)
-
-4-show the vertical arrangement
-
-5-Modifier explenation
-
-6-explore more methods
-
-7-padding
-
-8-offset
-
-9-Spacer
-
-10-Modifier sequential action by border and padding
-
-11-Card Sample
-//https://developer.android.com/codelabs/jetpack-compose-layouts#2
- */
 
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     GDGSeries1Theme {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .border(2.dp, Color.Green)
-                .padding(16.dp)
-                .border(2.dp, Color.Red)
-                .padding(16.dp)
-                .border(4.dp, Color.Blue)
 
-        ) {
-            Row {
-                Image(
-                    painter = painterResource(id = R.drawable.ic_leo), contentDescription = "leonardo",
-                    modifier = Modifier
-                        .padding(end = 16.dp)
-                        .size(100.dp)
-                        .clip(CircleShape)
-
-                )
-                Column() {
-                    Text(text = "leonardo Dav", fontSize = 24.sp, fontWeight = Bold)
-                    Text(text = "500 years ago")
-                }
-
-            }
-            val current = LocalContext.current
-            Card(modifier = Modifier
-                .align(CenterHorizontally)
-                .clickable {
-                    Toast
-                        .makeText(current, "Clicked", Toast.LENGTH_LONG)
-                        .show()
-                }) {
-                Image(painter = painterResource(id = R.drawable.ic_work), contentDescription = "mona lisa")
-            }
-        }
     }
 }
 
 
-@Composable
-fun MessageCard(msg: Message) {
-    // Add padding around our message
-    Row(modifier = Modifier.padding(all = 8.dp)) {
-        Image(
-            painter = painterResource(R.drawable.ic_leo),
-            contentDescription = "Contact profile picture",
-            modifier = Modifier
-                // Set image size to 40 dp
-                .size(40.dp)
-                // Clip image to be shaped as a circle
-                .clip(CircleShape)
-        )
-
-        // Add a horizontal space between the image and the column
-        Spacer(modifier = Modifier.width(8.dp))
-
-        Column {
-            Text(text = msg.author)
-            // Add a vertical space between the author and message texts
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(text = msg.body)
-        }
-    }
-}
-
-data class Message(val author: String, val body: String)
