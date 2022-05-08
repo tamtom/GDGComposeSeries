@@ -59,6 +59,16 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+//TODO(1)  Create Cart Item composable
+//TODO(2)  update the quantity item
+//TODO(Note)  State created in composables needs to be remembered
+//TODO(3)  try the property delegate using the by keyword
+//TODO(4)  make cart item reusable
+// statefull compose, stateless compose
+
+//TODO(5)  observe a state from livdata
+//TODO(6)  sideEffect sample
+
 
 
 
