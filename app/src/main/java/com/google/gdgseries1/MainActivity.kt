@@ -52,42 +52,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             GDGSeries1Theme {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .border(2.dp, Color.Green)
-                        .padding(16.dp)
-                        .border(2.dp, Color.Red)
-                        .padding(16.dp)
-                        .border(4.dp, Color.Blue)
 
-                ) {
-                    Row {
-                        Image(
-                            painter = painterResource(id = R.drawable.ic_leo), contentDescription = "leonardo",
-                            modifier = Modifier
-                                .padding(end = 16.dp)
-                                .size(100.dp)
-                                .clip(CircleShape)
-
-                        )
-                        Column() {
-                            Text(text = "leonardo Dav", fontSize = 24.sp, fontWeight = Bold)
-                            Text(text = "500 years ago")
-                        }
-
-                    }
-                    val current = LocalContext.current
-                    Card(modifier = Modifier
-                        .align(CenterHorizontally)
-                        .clickable {
-                            Toast
-                                .makeText(current, "Clicked", Toast.LENGTH_LONG)
-                                .show()
-                        }) {
-                        Image(painter = painterResource(id = R.drawable.ic_work), contentDescription = "mona lisa")
-                    }
-                }
 
 
             }
@@ -128,7 +93,42 @@ Garage cars Example:
 @Composable
 fun DefaultPreview() {
     GDGSeries1Theme {
-        // Greeting("Android")
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .border(2.dp, Color.Green)
+                .padding(16.dp)
+                .border(2.dp, Color.Red)
+                .padding(16.dp)
+                .border(4.dp, Color.Blue)
+
+        ) {
+            Row {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_leo), contentDescription = "leonardo",
+                    modifier = Modifier
+                        .padding(end = 16.dp)
+                        .size(100.dp)
+                        .clip(CircleShape)
+
+                )
+                Column() {
+                    Text(text = "leonardo Dav", fontSize = 24.sp, fontWeight = Bold)
+                    Text(text = "500 years ago")
+                }
+
+            }
+            val current = LocalContext.current
+            Card(modifier = Modifier
+                .align(CenterHorizontally)
+                .clickable {
+                    Toast
+                        .makeText(current, "Clicked", Toast.LENGTH_LONG)
+                        .show()
+                }) {
+                Image(painter = painterResource(id = R.drawable.ic_work), contentDescription = "mona lisa")
+            }
+        }
     }
 }
 
