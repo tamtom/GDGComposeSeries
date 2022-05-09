@@ -1,60 +1,46 @@
 package com.google.gdgseries1
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.Center
-import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.layout.HorizontalAlignmentLine
-import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.font.FontWeight.Companion.Bold
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.gdgseries1.ui.theme.GDGSeries1Theme
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import kotlinx.coroutines.delay
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             GDGSeries1Theme {
+                val viewmodel: CartViewModel = viewModel()
+                val flowquantity = viewmodel.flow.collectAsState(initial = 0)
 
-
-
+                 val quantity by viewmodel.quantity.observeAsState(0)
+                CartItem(
+                    quantity,
+                    onPlus = viewmodel::increment,
+                    onMinus = viewmodel::decrement
+                )
             }
         }
     }
@@ -70,16 +56,44 @@ class MainActivity : ComponentActivity() {
 //TODO(6)  sideEffect sample
 
 
-
-
-
-
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     GDGSeries1Theme {
+        var quantity by rememberSaveable {
+            mutableStateOf(0)
+        }
+        var perfumQuantity by rememberSaveable {
+            mutableStateOf(1)
+        }
+        Column {
+            CartItem(quantity, onPlus = {
+                quantity += 2
+            }, onMinus = {
+                quantity -= 3
+            })
+            CartItem(perfumQuantity, onPlus = {
+                perfumQuantity += 5
+            }, onMinus = {
+                perfumQuantity -= 5
+            })
+        }
 
     }
 }
 
+@Composable
+fun CartItem(quantity: Int, onPlus: () -> Unit, onMinus: () -> Unit) {
 
+    Row(horizontalArrangement = Arrangement.Center, verticalAlignment = Alignment.CenterVertically) {
+        Button(onClick = { onPlus() }) {
+            Text(text = "+")
+        }
+
+        Text(text = "Qt:${quantity}", fontSize = 40.sp)
+
+        Button(onClick = { onMinus() }) {
+            Text(text = "-")
+        }
+    }
+}
