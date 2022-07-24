@@ -32,8 +32,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             GDGSeries1Theme {
+                //TODO move this to a separate screen
+                //TODO create navigation controller
+                //TODO create navigation host
+                //TODO move the logic to a separate class
                 val viewmodel: CartViewModel = viewModel()
-                val flowquantity = viewmodel.flow.collectAsState(initial = 0)
 
                  val quantity by viewmodel.quantity.observeAsState(0)
                 CartItem(
@@ -45,15 +48,13 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-//TODO(1)  Create Cart Item composable
-//TODO(2)  update the quantity item
-//TODO(Note)  State created in composables needs to be remembered
-//TODO(3)  try the property delegate using the by keyword
-//TODO(4)  make cart item reusable
-// statefull compose, stateless compose
-
-//TODO(5)  observe a state from livdata
-//TODO(6)  sideEffect sample
+//TODO(1) import navigation compose dependencies
+//TODO(2)  Create Details Screen
+//TODO()  Create NavHost
+//TODO(3)  Navigate between main and details screen
+//TODO(4) pass Arguments
+//TODO(5)  best practices using AppNavigation Class
+//TODO(6)  state hoisting for navigation
 
 
 @Preview(showBackground = true)

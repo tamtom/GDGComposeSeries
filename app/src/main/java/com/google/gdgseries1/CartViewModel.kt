@@ -11,12 +11,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 class CartViewModel : ViewModel() {
 
-    private val _quantity = MutableLiveData<Int>()
+    private val _quantity = MutableLiveData<Int>(0)
     val quantity: LiveData<Int> = _quantity
     fun increment() {
         _quantity.value = _quantity.value?.plus(1)
     }
-     val flow: Flow<Int>
     fun decrement() {
         _quantity.value = _quantity.value?.minus(1)
     }
