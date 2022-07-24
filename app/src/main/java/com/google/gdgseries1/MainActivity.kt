@@ -25,6 +25,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import kotlinx.coroutines.delay
 
 class MainActivity : ComponentActivity() {
@@ -32,28 +37,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             GDGSeries1Theme {
-                //TODO move this to a separate screen
-                //TODO create navigation controller
-                //TODO create navigation host
-                //TODO move the logic to a separate class
-                val viewmodel: CartViewModel = viewModel()
-
-                 val quantity by viewmodel.quantity.observeAsState(0)
-                CartItem(
-                    quantity,
-                    onPlus = viewmodel::increment,
-                    onMinus = viewmodel::decrement
-                )
+             Navigation()
             }
         }
     }
 }
-//TODO(1) import navigation compose dependencies
-//TODO(2)  Create Details Screen
-//TODO()  Create NavHost
-//TODO(3)  Navigate between main and details screen
-//TODO(4) pass Arguments
-//TODO(5)  best practices using AppNavigation Class
 //TODO(6)  state hoisting for navigation
 
 
@@ -83,18 +71,4 @@ fun DefaultPreview() {
     }
 }
 
-@Composable
-fun CartItem(quantity: Int, onPlus: () -> Unit, onMinus: () -> Unit) {
 
-    Row(horizontalArrangement = Arrangement.Center, verticalAlignment = Alignment.CenterVertically) {
-        Button(onClick = { onPlus() }) {
-            Text(text = "+")
-        }
-
-        Text(text = "Qt:${quantity}", fontSize = 40.sp)
-
-        Button(onClick = { onMinus() }) {
-            Text(text = "-")
-        }
-    }
-}
