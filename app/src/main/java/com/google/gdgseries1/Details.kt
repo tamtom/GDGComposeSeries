@@ -8,12 +8,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun DetailsContent(quantity: Int?) {
     Box(Modifier.fillMaxSize().background(Color.White), contentAlignment = Alignment.Center) {
-        Text(text = "Your quantity is $quantity")
+        Text(text = "Your quantity is $quantity", modifier = Modifier.testTag(SUCCESS))
     }
 
 }
@@ -23,3 +24,4 @@ fun DetailsContent(quantity: Int?) {
 fun DetailsPreview(){
     DetailsContent(quantity = 10)
 }
+const val SUCCESS = "SUCCESS"
